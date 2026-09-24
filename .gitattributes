@@ -1,0 +1,6 @@
+# Keep development files out of `git archive` release ZIPs (WordPress.org package).
+/.gitattributes  export-ignore
+/.gitignore      export-ignore
+/.github         export-ignore
+/README.md       export-ignore
+/.wordpress-org  export-ignore

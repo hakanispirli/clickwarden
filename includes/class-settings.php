@@ -22,7 +22,9 @@ class ClickWarden_Settings {
             'excluded_ips'       => '',
             'trusted_proxies'    => '',
             'geo_enabled'        => 0,
+            'geo_provider'       => 'ipapiis',
             'ipapiis_key'        => '',
+            'proxycheck_key'     => '',
             'ipapi_fallback'     => 0,
             'ipapi_key'          => '',
             'ads_campaigns'      => '',
@@ -106,9 +108,14 @@ class ClickWarden_Settings {
             $clean[$key] = empty($input[$key]) ? 0 : 1;
         }
 
+        $provider = (string) ($input['geo_provider'] ?? '');
+        $clean['geo_provider'] = array_key_exists($provider, ClickWarden_IP_Info::providers()) ? $provider : $defaults['geo_provider'];
+
         foreach (['ipapiis_key', 'ipapi_key'] as $key) {
             $clean[$key] = preg_replace('/[^A-Za-z0-9]/', '', (string) ($input[$key] ?? ''));
         }
+        // proxycheck.io keys are dash separated (111111-222222-333333-444444).
+        $clean['proxycheck_key'] = substr(preg_replace('/[^A-Za-z0-9-]/', '', (string) ($input['proxycheck_key'] ?? '')), 0, 64);
 
         self::$cache = null;
 

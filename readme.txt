@@ -21,7 +21,7 @@ Everything runs on your own WordPress site. There is no subscription and no acco
 1. A small script (a few KB, no dependencies) records each page view, including the Google Ads click id (gclid, gbraid, wbraid), campaign id and UTM parameters. It runs in the browser, so it keeps working behind page caches and CDNs.
 2. Every visitor IP gets a risk score from 0 to 100, based on:
    * repeated ad clicks from the same IP **or the same browser** (Google Analytics client id), even when the IP changes
-   * datacenter, VPN, proxy and Tor networks
+   * datacenter, VPN, proxy and Tor networks (via ipapi.is or proxycheck.io, your choice)
    * automated and headless browsers (WebDriver, Puppeteer, Playwright, curl, …)
    * ad clicks without any interaction or time on page
    * clicks from outside your target countries
@@ -44,11 +44,13 @@ Everything runs on your own WordPress site. There is no subscription and no acco
 
 ClickWarden is built and maintained by [Webmarka](https://webmarka.com), a digital agency. We use it on our own client campaigns and share it free of charge.
 
+The full source code is available on [GitHub](https://github.com/hakanispirli/clickwarden). Bug reports and pull requests are welcome.
+
 == Installation ==
 
 1. Install and activate the plugin.
 2. **Purge your page cache and CDN once**, so cached pages include the tracker.
-3. Go to **ClickWarden → Settings**: add your own IP to "Excluded IPs", set your target countries and enable network lookups.
+3. Go to **ClickWarden → Settings**: add your own IP to "Excluded IPs", set your target countries, enable network lookups and choose a provider (ipapi.is or proxycheck.io).
 4. Go to **ClickWarden → Google Ads**: enter the exact names of the campaigns to protect, copy the script and add it in Google Ads under Tools → Bulk actions → Scripts. Run "Preview" first, then schedule it hourly.
 
 == Frequently Asked Questions ==
@@ -77,14 +79,16 @@ The script manages campaign-level IP exclusions. They apply to the whole campaig
 
 ClickWarden connects to the following services. Nothing is sent to any of them until you enable or set it up.
 
-= ipapi.is =
+= IP lookup provider: ipapi.is or proxycheck.io =
 
-Used to look up the country, city, network provider and network type (datacenter, VPN, proxy, Tor) of visitor IP addresses. Only sent when "Look up visitor IPs with ipapi.is" is enabled in the settings. Data sent: the visitor IP address and, if configured, your ipapi.is API key. Lookups run in the background, at most once every 30 days per IP.
-Terms of service: https://ipapi.is/terms.html – Privacy policy: https://ipapi.is/privacy.html
+Used to look up the country, city, network provider and network type (datacenter, VPN, proxy, Tor) of visitor IP addresses. You choose one of the two providers in the settings; only the selected one is contacted, and only when "Look up visitor IP addresses" is enabled. Data sent: the visitor IP address and, if configured, your API key for that provider. Lookups run in the background, at most once every 30 days per IP.
+
+ipapi.is – Terms of service: https://ipapi.is/terms.html – Privacy policy: https://ipapi.is/privacy.html
+proxycheck.io – Terms of service: https://proxycheck.io/terms – Privacy policy: https://proxycheck.io/privacy
 
 = ip-api.com =
 
-Optional fallback when ipapi.is is unavailable. Only used when "Use ip-api.com …" is enabled. Data sent: the visitor IP address and, if configured, your ip-api.com Pro key. The free endpoint is for non-commercial use only.
+Optional fallback when the selected provider is unavailable. Only used when "Use ip-api.com …" is enabled. Data sent: the visitor IP address and, if configured, your ip-api.com Pro key. The free endpoint is for non-commercial use only.
 Terms: https://ip-api.com/docs/legal – Privacy policy: https://ip-api.com/docs/legal
 
 = Google Ads =
@@ -111,7 +115,7 @@ ClickWarden stores visitor IP addresses, user agents, visited paths, referrers, 
 * Google Analytics and Google Ads cookies (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) and gad_source / gad_campaignid parameters.
 * Detects the same browser clicking ads from several IP addresses.
 * Page reloads with the same click id are no longer counted as new ad clicks.
-* Network lookups are opt-in; ip-api.com fallback is optional.
+* Network lookups are opt-in, with a choice of provider: ipapi.is or proxycheck.io. The ip-api.com fallback is optional.
 * Setup checklist, tracking health warning, redesigned admin.
 * Automatic exclusions for WP Rocket, Autoptimize and SiteGround Optimizer.
 * Existing data from "Visitor Tracker" 2.x is imported automatically.

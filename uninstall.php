@@ -18,7 +18,7 @@ foreach (['clickwarden_settings', 'clickwarden_db_version', 'clickwarden_install
     delete_option($clickwarden_option);
 }
 
-foreach (['clickwarden_geo_lock', 'clickwarden_geo_backoff', 'clickwarden_geo_backoff_ipapiis'] as $clickwarden_transient) {
+foreach (['clickwarden_geo_lock', 'clickwarden_geo_backoff', 'clickwarden_geo_backoff_ipapiis', 'clickwarden_geo_backoff_proxycheck'] as $clickwarden_transient) {
     delete_transient($clickwarden_transient);
 }
 

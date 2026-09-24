@@ -227,7 +227,7 @@ class ClickWarden_Admin {
                 $data['next_geo'] = wp_next_scheduled('clickwarden_geo_queue');
                 $data['next_purge'] = wp_next_scheduled('clickwarden_purge');
                 $data['paused'] = [
-                    'ipapiis' => (int) get_transient(ClickWarden_IP_Info::BACKOFF_IPAPIIS),
+                    'primary' => ClickWarden_IP_Info::primary_paused_until(),
                     'ipapi'   => (int) get_transient(ClickWarden_IP_Info::BACKOFF_IPAPI),
                 ];
                 break;

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       ClickWarden – Click Fraud Protection for Google Ads
- * Plugin URI:        https://webmarka.com/clickwarden
+ * Plugin URI:        https://github.com/hakanispirli/clickwarden
  * Description:       Detects invalid and fraudulent Google Ads clicks on your own server and keeps your campaign IP exclusions up to date automatically. Free, self-hosted, cache friendly.
  * Version:           3.0.0
  * Author:            Webmarka
@@ -12,6 +12,17 @@
  * Domain Path:       /languages
  * Requires at least: 6.5
  * Requires PHP:      8.1
+ *
+ * ClickWarden is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 2 of the License, or (at your option) any later version.
+ *
+ * ClickWarden is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * ClickWarden. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
  */
 
 if (!defined('ABSPATH')) {
@@ -149,10 +160,17 @@ final class ClickWarden {
             return;
         }
 
+        $services = ClickWarden_IP_Info::primary_label();
+        if (ClickWarden_Settings::get('ipapi_fallback')) {
+            /* translators: 1: selected IP lookup provider, 2: fallback provider */
+            $services = sprintf(__('%1$s (or %2$s as a fallback)', 'clickwarden'), $services, 'ip-api.com');
+        }
+
         $content = sprintf(
-            /* translators: %d: retention period in days */
-            __('To protect our advertising campaigns against invalid and fraudulent clicks, we record the IP address, browser user agent, visited page, referrer, advertising click identifiers (gclid, gbraid, wbraid, gad_campaignid, utm parameters), the identifiers stored in existing Google Analytics and Google Ads cookies (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) and basic engagement data (time on page, scroll depth, whether the page was interacted with) of our visitors. If enabled, the IP address is sent to ipapi.is (and optionally ip-api.com) to look up its approximate location and network type. This processing is based on our legitimate interest in preventing ad fraud. The data is kept for %d days and then deleted automatically; IP addresses identified as fraudulent may be kept longer and shared with Google Ads as an IP exclusion list.', 'clickwarden'),
-            (int) ClickWarden_Settings::get('retention_days')
+            /* translators: 1: retention period in days, 2: IP lookup service name(s) */
+            __('To protect our advertising campaigns against invalid and fraudulent clicks, we record the IP address, browser user agent, visited page, referrer, advertising click identifiers (gclid, gbraid, wbraid, gad_campaignid, utm parameters), the identifiers stored in existing Google Analytics and Google Ads cookies (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) and basic engagement data (time on page, scroll depth, whether the page was interacted with) of our visitors. If enabled, the IP address is sent to %2$s to look up its approximate location and network type. This processing is based on our legitimate interest in preventing ad fraud. The data is kept for %1$d days and then deleted automatically; IP addresses identified as fraudulent may be kept longer and shared with Google Ads as an IP exclusion list.', 'clickwarden'),
+            (int) ClickWarden_Settings::get('retention_days'),
+            $services
         );
 
         wp_add_privacy_policy_content('ClickWarden', wp_kses_post(wpautop($content, false)));

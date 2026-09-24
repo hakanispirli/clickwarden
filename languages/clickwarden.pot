@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-21T10:20:03+00:00\n"
+"POT-Creation-Date: 2026-09-24T21:42:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: clickwarden\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: clickwarden.php
-msgid "https://webmarka.com/clickwarden"
+msgid "https://github.com/hakanispirli/clickwarden"
 msgstr ""
 
 #. Description of the plugin
@@ -39,14 +39,20 @@ msgstr ""
 msgid "https://webmarka.com"
 msgstr ""
 
-#: clickwarden.php:119
+#: clickwarden.php:130
 msgid "Every minute (ClickWarden)"
 msgstr ""
 
-#. translators: %d: retention period in days
-#: clickwarden.php:154
+#. translators: 1: selected IP lookup provider, 2: fallback provider
+#: clickwarden.php:166
 #, php-format
-msgid "To protect our advertising campaigns against invalid and fraudulent clicks, we record the IP address, browser user agent, visited page, referrer, advertising click identifiers (gclid, gbraid, wbraid, gad_campaignid, utm parameters), the identifiers stored in existing Google Analytics and Google Ads cookies (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) and basic engagement data (time on page, scroll depth, whether the page was interacted with) of our visitors. If enabled, the IP address is sent to ipapi.is (and optionally ip-api.com) to look up its approximate location and network type. This processing is based on our legitimate interest in preventing ad fraud. The data is kept for %d days and then deleted automatically; IP addresses identified as fraudulent may be kept longer and shared with Google Ads as an IP exclusion list."
+msgid "%1$s (or %2$s as a fallback)"
+msgstr ""
+
+#. translators: 1: retention period in days, 2: IP lookup service name(s)
+#: clickwarden.php:171
+#, php-format
+msgid "To protect our advertising campaigns against invalid and fraudulent clicks, we record the IP address, browser user agent, visited page, referrer, advertising click identifiers (gclid, gbraid, wbraid, gad_campaignid, utm parameters), the identifiers stored in existing Google Analytics and Google Ads cookies (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) and basic engagement data (time on page, scroll depth, whether the page was interacted with) of our visitors. If enabled, the IP address is sent to %2$s to look up its approximate location and network type. This processing is based on our legitimate interest in preventing ad fraud. The data is kept for %1$d days and then deleted automatically; IP addresses identified as fraudulent may be kept longer and shared with Google Ads as an IP exclusion list."
 msgstr ""
 
 #. translators: %s: link to Webmarka
@@ -766,7 +772,7 @@ msgid "All levels"
 msgstr ""
 
 #: templates/tab-ips.php:93
-#: templates/tab-settings.php:152
+#: templates/tab-settings.php:201
 msgid "Status"
 msgstr ""
 
@@ -924,211 +930,243 @@ msgstr ""
 msgid "Tip: Google Ads adds the campaign ID to your URLs automatically. To also see which keywords attract suspicious clicks, add utm_term={keyword} to the Final URL suffix (Google Ads → Settings → Tracking). Compare the ad clicks here with the clicks in Google Ads: bots that do not run JavaScript never reach this report."
 msgstr ""
 
-#: templates/tab-settings.php:22
+#: templates/tab-settings.php:21
+msgid "Free: 1,000 lookups a day, commercial use allowed. A key is optional; a free key gives you your own daily quota."
+msgstr ""
+
+#: templates/tab-settings.php:27
+msgid "Free: 100 lookups a day without a key, 1,000 a day with a free key, commercial use allowed."
+msgstr ""
+
+#: templates/tab-settings.php:38
 msgid "Risk scoring"
 msgstr ""
 
-#: templates/tab-settings.php:25
+#: templates/tab-settings.php:41
 msgid "Target countries"
 msgstr ""
 
-#: templates/tab-settings.php:28
+#: templates/tab-settings.php:44
 msgid "Two-letter country codes your campaigns target, comma separated. Clicks from other countries add risk. Leave empty to disable."
 msgstr ""
 
-#: templates/tab-settings.php:32
+#: templates/tab-settings.php:48
 msgid "Repeated clicks"
 msgstr ""
 
 #. translators: 1: click count input, 2: hours input
-#: templates/tab-settings.php:37
+#: templates/tab-settings.php:53
 #, php-format
 msgid "%1$s or more ad clicks from the same IP or browser within %2$s hours"
 msgstr ""
 
-#: templates/tab-settings.php:38
+#: templates/tab-settings.php:54
 msgid "Click threshold"
 msgstr ""
 
-#: templates/tab-settings.php:39
+#: templates/tab-settings.php:55
 msgid "Time window in hours"
 msgstr ""
 
-#: templates/tab-settings.php:45
+#: templates/tab-settings.php:61
 msgid "Score thresholds"
 msgstr ""
 
-#: templates/tab-settings.php:48
+#: templates/tab-settings.php:64
 msgid "Suspicious from"
 msgstr ""
 
-#: templates/tab-settings.php:53
+#: templates/tab-settings.php:69
 msgid "Watch from"
 msgstr ""
 
-#: templates/tab-settings.php:56
+#: templates/tab-settings.php:72
 msgid "Scores range from 0 to 100. Only suspicious IPs that clicked an ad are added to the Google Ads exclusion list."
 msgstr ""
 
-#: templates/tab-settings.php:60
+#: templates/tab-settings.php:76
 msgid "Request limit"
 msgstr ""
 
-#: templates/tab-settings.php:63
+#: templates/tab-settings.php:79
 msgid "page views per minute per IP"
 msgstr ""
 
-#: templates/tab-settings.php:64
+#: templates/tab-settings.php:80
 msgid "Requests above this limit are not recorded and add risk to the IP."
 msgstr ""
 
-#: templates/tab-settings.php:69
+#: templates/tab-settings.php:85
 msgid "Tracking"
 msgstr ""
 
-#: templates/tab-settings.php:72
+#: templates/tab-settings.php:88
 msgid "Keep data for"
 msgstr ""
 
-#: templates/tab-settings.php:75
+#: templates/tab-settings.php:91
 msgid "days"
 msgstr ""
 
-#: templates/tab-settings.php:76
+#: templates/tab-settings.php:92
 msgid "Older visits are deleted automatically every day. Whitelisted and flagged IPs are kept."
 msgstr ""
 
-#: templates/tab-settings.php:80
+#: templates/tab-settings.php:96
 msgid "Excluded IPs"
 msgstr ""
 
-#: templates/tab-settings.php:84
+#: templates/tab-settings.php:100
 msgid "Your office or team IPs are never recorded. One IP or CIDR range (e.g. 88.1.2.0/24) per line."
 msgstr ""
 
 #. translators: %s: current IP address
-#: templates/tab-settings.php:89
+#: templates/tab-settings.php:105
 #, php-format
 msgid "Your current IP: %s"
 msgstr ""
 
-#: templates/tab-settings.php:96
+#: templates/tab-settings.php:112
 msgid "Trusted proxies"
 msgstr ""
 
-#: templates/tab-settings.php:99
+#: templates/tab-settings.php:115
 msgid "Leave empty unless the site is behind a CDN or reverse proxy. The X-Forwarded-For header is only trusted for requests coming from these IPs/ranges; otherwise visitors could fake their IP address."
 msgstr ""
 
-#: templates/tab-settings.php:104
+#: templates/tab-settings.php:120
 msgid "Network lookups"
 msgstr ""
 
-#: templates/tab-settings.php:107
-msgid "IP lookups"
-msgstr ""
-
-#: templates/tab-settings.php:112
-msgid "Look up visitor IPs with ipapi.is"
-msgstr ""
-
-#: templates/tab-settings.php:115
-msgid "Sends visitor IP addresses to ipapi.is to find their country, network and whether they belong to a datacenter, VPN, proxy or Tor. These are the strongest click fraud signals. Nothing is sent until you enable this."
-msgstr ""
-
-#: templates/tab-settings.php:116
-msgid "Privacy policy"
-msgstr ""
-
-#: templates/tab-settings.php:121
-msgid "ipapi.is API key"
-msgstr ""
-
 #: templates/tab-settings.php:124
-msgid "Optional but recommended: a free key from ipapi.is raises the daily limit. IPs that clicked an ad are always looked up first."
+msgid "How network lookups work"
+msgstr ""
+
+#: templates/tab-settings.php:126
+msgid "Visits are recorded on your own server. No IP address leaves your site until you enable lookups."
+msgstr ""
+
+#: templates/tab-settings.php:127
+msgid "Once a minute, a background task sends new visitor IP addresses in batches to the provider you choose. Only the IP address is sent, plus your API key if you entered one."
 msgstr ""
 
 #: templates/tab-settings.php:128
-msgid "Fallback provider"
+msgid "The answer (country, network and whether the IP belongs to a datacenter, VPN, proxy or Tor) is stored in your database and the risk score is updated right away. These are the strongest click fraud signals."
 msgstr ""
 
-#: templates/tab-settings.php:133
-msgid "Use ip-api.com when ipapi.is is unavailable or its daily quota is used up"
+#: templates/tab-settings.php:129
+msgid "IPs that clicked an ad are looked up first, and each IP is looked up again at most once every 30 days, so a free daily quota goes a long way."
+msgstr ""
+
+#: templates/tab-settings.php:130
+msgid "If the provider is unreachable or its daily quota is used up, lookups pause and resume automatically."
 msgstr ""
 
 #: templates/tab-settings.php:136
-msgid "The free ip-api.com endpoint is HTTP only and for non-commercial use. Enter a Pro key below for HTTPS and commercial use."
+msgid "IP lookups"
 msgstr ""
 
-#: templates/tab-settings.php:137
+#: templates/tab-settings.php:141
+msgid "Look up visitor IP addresses with the provider below"
+msgstr ""
+
+#: templates/tab-settings.php:146
+#: templates/tab-settings.php:149
+msgid "Provider"
+msgstr ""
+
+#: templates/tab-settings.php:159
+#: templates/tab-settings.php:186
 msgid "Terms"
 msgstr ""
 
-#: templates/tab-settings.php:140
-msgid "ip-api.com Pro key"
-msgstr ""
-
-#: templates/tab-settings.php:154
-msgid "IPs waiting for geolocation"
-msgstr ""
-
-#: templates/tab-settings.php:156
-msgid "Active provider"
-msgstr ""
-
 #: templates/tab-settings.php:160
-msgid "Disabled"
+msgid "Privacy policy"
 msgstr ""
 
-#. translators: %s: time when the primary provider is retried
-#: templates/tab-settings.php:165
+#. translators: %s: provider name, e.g. proxycheck.io
+#: templates/tab-settings.php:166
 #, php-format
-msgid "ip-api.com (ipapi.is retried at %s)"
+msgid "%s API key (optional)"
 msgstr ""
 
-#: templates/tab-settings.php:167
-msgid "Paused, retrying shortly"
+#: templates/tab-settings.php:177
+msgid "Fallback provider"
 msgstr ""
 
-#: templates/tab-settings.php:171
-msgid "Next geolocation run"
-msgstr ""
-
-#: templates/tab-settings.php:172
-#: templates/tab-settings.php:174
-msgid "Not scheduled"
-msgstr ""
-
-#: templates/tab-settings.php:173
-msgid "Next cleanup"
-msgstr ""
-
-#: templates/tab-settings.php:178
-msgid "WP-Cron only runs when the site gets traffic. For reliable lookups, add a cron job in your hosting control panel that runs every minute:"
+#: templates/tab-settings.php:182
+msgid "Use ip-api.com when the selected provider is unavailable or its daily quota is used up"
 msgstr ""
 
 #: templates/tab-settings.php:185
+msgid "The free ip-api.com endpoint is HTTP only and for non-commercial use. Enter a Pro key below for HTTPS and commercial use."
+msgstr ""
+
+#: templates/tab-settings.php:189
+msgid "ip-api.com Pro key"
+msgstr ""
+
+#: templates/tab-settings.php:203
+msgid "IPs waiting for geolocation"
+msgstr ""
+
+#: templates/tab-settings.php:205
+msgid "Active provider"
+msgstr ""
+
+#: templates/tab-settings.php:209
+msgid "Disabled"
+msgstr ""
+
+#. translators: 1: selected provider name, 2: time when it is retried
+#: templates/tab-settings.php:214
+#, php-format
+msgid "ip-api.com (%1$s retried at %2$s)"
+msgstr ""
+
+#: templates/tab-settings.php:216
+msgid "Paused, retrying shortly"
+msgstr ""
+
+#: templates/tab-settings.php:220
+msgid "Next geolocation run"
+msgstr ""
+
+#: templates/tab-settings.php:221
+#: templates/tab-settings.php:223
+msgid "Not scheduled"
+msgstr ""
+
+#: templates/tab-settings.php:222
+msgid "Next cleanup"
+msgstr ""
+
+#: templates/tab-settings.php:227
+msgid "WP-Cron only runs when the site gets traffic. For reliable lookups, add a cron job in your hosting control panel that runs every minute:"
+msgstr ""
+
+#: templates/tab-settings.php:234
 msgid "Page cache & CDN"
 msgstr ""
 
-#: templates/tab-settings.php:186
+#: templates/tab-settings.php:235
 msgid "The tracker runs in the browser, so cached pages are tracked too. After installing or updating ClickWarden, purge your page cache and your CDN once, otherwise cached pages are served without the tracker. The script is excluded from LiteSpeed Cache JS optimization automatically; with other optimization plugins, exclude clickwarden/assets/js/tracker.js from combining and delaying."
 msgstr ""
 
-#: templates/tab-settings.php:190
+#: templates/tab-settings.php:239
 msgid "Clean up"
 msgstr ""
 
 #. translators: %d: retention period in days
-#: templates/tab-settings.php:194
+#: templates/tab-settings.php:243
 #, php-format
 msgid "Delete visits older than %d days now."
 msgstr ""
 
-#: templates/tab-settings.php:198
+#: templates/tab-settings.php:247
 msgid "Delete old visits now? This cannot be undone."
 msgstr ""
 
-#: templates/tab-settings.php:201
+#: templates/tab-settings.php:250
 msgid "Delete old visits"
 msgstr ""

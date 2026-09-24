@@ -420,6 +420,26 @@ a.cw-card:focus-visible {
 
 .cw-callout .dashicons { color: var(--cw-accent); }
 .cw-callout p { margin: 0; }
+.cw-callout ul { margin: 6px 0 0 18px; list-style: disc; }
+.cw-callout li { margin-bottom: 4px; }
+
+.cw-providers { display: grid; gap: 10px; }
+
+.cw-provider {
+    padding: 12px 14px;
+    background: var(--cw-surface);
+    border: 1px solid var(--cw-border);
+    border-radius: var(--cw-radius-sm);
+}
+
+.cw-provider:has(input[type="radio"]:checked) {
+    background: var(--cw-accent-soft);
+    border-color: var(--cw-accent);
+}
+
+.cw-provider__head { display: flex; gap: 8px; align-items: center; font-weight: 600; }
+.cw-provider .description,
+.cw-provider__key { margin: 6px 0 0 24px; }
 
 .cw-chip {
     display: inline-flex;

@@ -132,6 +132,7 @@ class ClickWarden_Ads_Sync {
      * The Google Ads script with this site's endpoint and token filled in.
      */
     public static function script(): string {
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reads a bundled local file.
         $template = (string) file_get_contents(CLICKWARDEN_PLUGIN_DIR . 'assets/google-ads-script.js');
         return strtr($template, [
             '{{ENDPOINT}}' => self::endpoint(),

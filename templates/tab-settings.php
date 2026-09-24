@@ -13,6 +13,22 @@ if (!defined('ABSPATH')) {
 $s = $data['settings'];
 $name = static fn(string $key): string => ClickWarden_Settings::OPTION . '[' . $key . ']';
 $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '';
+
+// Listed in the order of ClickWarden_IP_Info::providers(); neither is preferred.
+$providers = [
+    'ipapiis'    => [
+        'key'     => 'ipapiis_key',
+        'text'    => __('Free: 1,000 lookups a day, commercial use allowed. A key is optional; a free key gives you your own daily quota.', 'clickwarden'),
+        'terms'   => 'https://ipapi.is/terms.html',
+        'privacy' => 'https://ipapi.is/privacy.html',
+    ],
+    'proxycheck' => [
+        'key'     => 'proxycheck_key',
+        'text'    => __('Free: 100 lookups a day without a key, 1,000 a day with a free key, commercial use allowed.', 'clickwarden'),
+        'terms'   => 'https://proxycheck.io/terms',
+        'privacy' => 'https://proxycheck.io/privacy',
+    ],
+];
 ?>
 
 <div class="cw-settings">
@@ -102,6 +118,19 @@ $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($
         </table>
 
         <h2 id="cw-geo"><?php esc_html_e('Network lookups', 'clickwarden'); ?></h2>
+        <div class="cw-callout">
+            <span class="dashicons dashicons-info-outline" aria-hidden="true"></span>
+            <div>
+                <p><strong><?php esc_html_e('How network lookups work', 'clickwarden'); ?></strong></p>
+                <ul>
+                    <li><?php esc_html_e('Visits are recorded on your own server. No IP address leaves your site until you enable lookups.', 'clickwarden'); ?></li>
+                    <li><?php esc_html_e('Once a minute, a background task sends new visitor IP addresses in batches to the provider you choose. Only the IP address is sent, plus your API key if you entered one.', 'clickwarden'); ?></li>
+                    <li><?php esc_html_e('The answer (country, network and whether the IP belongs to a datacenter, VPN, proxy or Tor) is stored in your database and the risk score is updated right away. These are the strongest click fraud signals.', 'clickwarden'); ?></li>
+                    <li><?php esc_html_e('IPs that clicked an ad are looked up first, and each IP is looked up again at most once every 30 days, so a free daily quota goes a long way.', 'clickwarden'); ?></li>
+                    <li><?php esc_html_e('If the provider is unreachable or its daily quota is used up, lookups pause and resume automatically.', 'clickwarden'); ?></li>
+                </ul>
+            </div>
+        </div>
         <table class="form-table" role="presentation">
             <tr>
                 <th scope="row"><?php esc_html_e('IP lookups', 'clickwarden'); ?></th>
@@ -109,19 +138,39 @@ $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($
                     <input type="hidden" name="<?php echo esc_attr($name('geo_enabled')); ?>" value="0">
                     <label>
                         <input type="checkbox" name="<?php echo esc_attr($name('geo_enabled')); ?>" value="1" <?php checked($s['geo_enabled'], 1); ?>>
-                        <?php esc_html_e('Look up visitor IPs with ipapi.is', 'clickwarden'); ?>
+                        <?php esc_html_e('Look up visitor IP addresses with the provider below', 'clickwarden'); ?>
                     </label>
-                    <p class="description">
-                        <?php esc_html_e('Sends visitor IP addresses to ipapi.is to find their country, network and whether they belong to a datacenter, VPN, proxy or Tor. These are the strongest click fraud signals. Nothing is sent until you enable this.', 'clickwarden'); ?>
-                        <a href="https://ipapi.is/privacy.html" target="_blank" rel="noopener"><?php esc_html_e('Privacy policy', 'clickwarden'); ?></a>
-                    </p>
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label for="cw-ipapiis-key"><?php esc_html_e('ipapi.is API key', 'clickwarden'); ?></label></th>
+                <th scope="row"><?php esc_html_e('Provider', 'clickwarden'); ?></th>
                 <td>
-                    <input id="cw-ipapiis-key" type="password" class="regular-text" autocomplete="off" name="<?php echo esc_attr($name('ipapiis_key')); ?>" value="<?php echo esc_attr($s['ipapiis_key']); ?>">
-                    <p class="description"><?php esc_html_e('Optional but recommended: a free key from ipapi.is raises the daily limit. IPs that clicked an ad are always looked up first.', 'clickwarden'); ?></p>
+                    <fieldset class="cw-providers">
+                        <legend class="screen-reader-text"><?php esc_html_e('Provider', 'clickwarden'); ?></legend>
+                        <?php foreach (ClickWarden_IP_Info::providers() as $provider_slug => $provider_label) : ?>
+                            <?php $provider = $providers[$provider_slug]; ?>
+                            <div class="cw-provider">
+                                <label class="cw-provider__head">
+                                    <input type="radio" name="<?php echo esc_attr($name('geo_provider')); ?>" value="<?php echo esc_attr($provider_slug); ?>" <?php checked($s['geo_provider'], $provider_slug); ?>>
+                                    <?php echo esc_html($provider_label); ?>
+                                </label>
+                                <p class="description">
+                                    <?php echo esc_html($provider['text']); ?>
+                                    <a href="<?php echo esc_url($provider['terms']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Terms', 'clickwarden'); ?></a> ·
+                                    <a href="<?php echo esc_url($provider['privacy']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Privacy policy', 'clickwarden'); ?></a>
+                                </p>
+                                <p class="cw-provider__key">
+                                    <label for="cw-key-<?php echo esc_attr($provider_slug); ?>">
+                                        <?php
+                                        /* translators: %s: provider name, e.g. proxycheck.io */
+                                        echo esc_html(sprintf(__('%s API key (optional)', 'clickwarden'), $provider_label));
+                                        ?>
+                                    </label><br>
+                                    <input id="cw-key-<?php echo esc_attr($provider_slug); ?>" type="password" class="regular-text" autocomplete="off" name="<?php echo esc_attr($name($provider['key'])); ?>" value="<?php echo esc_attr($s[$provider['key']]); ?>">
+                                </p>
+                            </div>
+                        <?php endforeach; ?>
+                    </fieldset>
                 </td>
             </tr>
             <tr>
@@ -130,7 +179,7 @@ $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($
                     <input type="hidden" name="<?php echo esc_attr($name('ipapi_fallback')); ?>" value="0">
                     <label>
                         <input type="checkbox" name="<?php echo esc_attr($name('ipapi_fallback')); ?>" value="1" <?php checked($s['ipapi_fallback'], 1); ?>>
-                        <?php esc_html_e('Use ip-api.com when ipapi.is is unavailable or its daily quota is used up', 'clickwarden'); ?>
+                        <?php esc_html_e('Use ip-api.com when the selected provider is unavailable or its daily quota is used up', 'clickwarden'); ?>
                     </label>
                     <p class="description">
                         <?php esc_html_e('The free ip-api.com endpoint is HTTP only and for non-commercial use. Enter a Pro key below for HTTPS and commercial use.', 'clickwarden'); ?>
@@ -158,11 +207,11 @@ $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($
                     <?php
                     if (!$s['geo_enabled']) {
                         esc_html_e('Disabled', 'clickwarden');
-                    } elseif (!$data['paused']['ipapiis']) {
-                        echo 'ipapi.is';
+                    } elseif (!$data['paused']['primary']) {
+                        echo esc_html(ClickWarden_IP_Info::primary_label());
                     } elseif ($s['ipapi_fallback'] && !$data['paused']['ipapi']) {
-                        /* translators: %s: time when the primary provider is retried */
-                        echo esc_html(sprintf(__('ip-api.com (ipapi.is retried at %s)', 'clickwarden'), wp_date('H:i', $data['paused']['ipapiis'])));
+                        /* translators: 1: selected provider name, 2: time when it is retried */
+                        echo esc_html(sprintf(__('ip-api.com (%1$s retried at %2$s)', 'clickwarden'), ClickWarden_IP_Info::primary_label(), wp_date('H:i', $data['paused']['primary'])));
                     } else {
                         esc_html_e('Paused, retrying shortly', 'clickwarden');
                     }

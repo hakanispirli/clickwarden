@@ -10,7 +10,34 @@ class ClickWarden_IP_Info {
 
     /** Transients holding the unix time until which a provider is paused. */
     public const BACKOFF_IPAPIIS = 'clickwarden_geo_backoff_ipapiis';
+    public const BACKOFF_PROXYCHECK = 'clickwarden_geo_backoff_proxycheck';
     public const BACKOFF_IPAPI = 'clickwarden_geo_backoff';
+
+    /** Primary providers the site owner can choose from: slug => [label, backoff transient]. */
+    private const PROVIDERS = [
+        'ipapiis'    => ['ipapi.is', self::BACKOFF_IPAPIIS],
+        'proxycheck' => ['proxycheck.io', self::BACKOFF_PROXYCHECK],
+    ];
+
+    public static function providers(): array {
+        return array_map(static fn(array $provider): string => $provider[0], self::PROVIDERS);
+    }
+
+    public static function primary(): string {
+        $provider = (string) ClickWarden_Settings::get('geo_provider');
+        return isset(self::PROVIDERS[$provider]) ? $provider : 'ipapiis';
+    }
+
+    public static function primary_label(): string {
+        return self::PROVIDERS[self::primary()][0];
+    }
+
+    /**
+     * @return int Unix time until which the selected provider is paused, 0 when it is active.
+     */
+    public static function primary_paused_until(): int {
+        return (int) get_transient(self::PROVIDERS[self::primary()][1]);
+    }
 
     /**
      * Only REMOTE_ADDR is trusted. Forwarded headers are read solely when the
@@ -52,18 +79,19 @@ class ClickWarden_IP_Info {
     }
 
     /**
-     * Cron worker: resolves queued IPs. ipapi.is is the primary provider
-     * (commercial use, HTTPS, VPN/Tor detection); ip-api.com takes over for
-     * whatever ipapi.is could not resolve, e.g. when its daily quota runs out
-     * during an attack.
+     * Cron worker: resolves queued IPs with the provider the site owner selected
+     * (ipapi.is or proxycheck.io, both with VPN/Tor/datacenter detection); the
+     * optional ip-api.com fallback takes over for whatever the primary provider
+     * could not resolve, e.g. when its daily quota runs out during an attack.
      */
     public static function process_queue(ClickWarden_Database $db): void {
         if (!ClickWarden_Settings::get('geo_enabled') || get_transient('clickwarden_geo_lock')) {
             return;
         }
-        $ipapiis_paused = (bool) get_transient(self::BACKOFF_IPAPIIS);
+        $primary = self::primary();
+        $primary_paused = self::primary_paused_until() > 0;
         $ipapi_paused = !ClickWarden_Settings::get('ipapi_fallback') || get_transient(self::BACKOFF_IPAPI);
-        if ($ipapiis_paused && $ipapi_paused) {
+        if ($primary_paused && $ipapi_paused) {
             return;
         }
         set_transient('clickwarden_geo_lock', 1, 50);
@@ -90,8 +118,8 @@ class ClickWarden_IP_Info {
             }
 
             $results = [];
-            if (!$ipapiis_paused) {
-                $results = self::request_ipapiis($lookup) ?? [];
+            if (!$primary_paused) {
+                $results = ('proxycheck' === $primary ? self::request_proxycheck($lookup) : self::request_ipapiis($lookup)) ?? [];
             }
 
             $remaining = array_values(array_diff($lookup, array_keys($results)));
@@ -138,7 +166,7 @@ class ClickWarden_IP_Info {
         $data = $code ? json_decode(wp_remote_retrieve_body($response), true) : null;
 
         if (200 !== $code || !is_array($data) || isset($data['error'])) {
-            // Quota exhausted, invalid key or outage: let ip-api.com handle lookups for a while.
+            // Quota exhausted, invalid key or outage: let the fallback handle lookups for a while.
             self::pause(self::BACKOFF_IPAPIIS, 429 === $code || 403 === $code || isset($data['error']) ? HOUR_IN_SECONDS : 10 * MINUTE_IN_SECONDS);
             return null;
         }
@@ -165,6 +193,63 @@ class ClickWarden_IP_Info {
                 'is_proxy'     => (!empty($item['is_proxy']) || !empty($item['is_vpn']) || !empty($item['is_tor'])) ? 1 : 0,
                 'is_hosting'   => empty($item['is_datacenter']) ? 0 : 1,
                 'is_mobile'    => empty($item['is_mobile']) ? 0 : 1,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * proxycheck.io v3: up to 1,000 IPs per POST, 100 lookups a day without a key, 1,000 with a free key.
+     *
+     * @return array<string, array>|null Normalised rows keyed by IP, null when the provider failed.
+     */
+    private static function request_proxycheck(array $ips): ?array {
+        $key = (string) ClickWarden_Settings::get('proxycheck_key');
+        // A POST without any query string is redirected to a lookup of the server's own IP, so p=0 (compact JSON) is always sent.
+        $args = '' !== $key ? ['key' => $key, 'p' => 0] : ['p' => 0];
+        $url = add_query_arg($args, 'https://proxycheck.io/v3/');
+
+        $response = wp_remote_post($url, [
+            'timeout'     => 15,
+            'redirection' => 0,
+            'body'        => ['ips' => implode(',', $ips)],
+        ]);
+
+        $code = is_wp_error($response) ? 0 : (int) wp_remote_retrieve_response_code($response);
+        $data = $code ? json_decode(wp_remote_retrieve_body($response), true) : null;
+        $status = is_array($data) ? (string) ($data['status'] ?? '') : '';
+
+        if (200 !== $code || !in_array($status, ['ok', 'warning'], true)) {
+            // "denied" means quota exhausted or a disabled key: wait longer than after an outage.
+            self::pause(self::BACKOFF_PROXYCHECK, 'denied' === $status || in_array($code, [401, 403, 429], true) ? HOUR_IN_SECONDS : 10 * MINUTE_IN_SECONDS);
+            return null;
+        }
+
+        $rows = [];
+        foreach ($ips as $ip) {
+            $item = $data[$ip] ?? null;
+            if (!is_array($item) || empty($item['location']) || empty($item['network'])) {
+                continue;
+            }
+
+            $location = (array) $item['location'];
+            $network = (array) $item['network'];
+            $detections = (array) ($item['detections'] ?? []);
+            $type = (string) ($network['type'] ?? '');
+            $provider = self::text($network['provider'] ?? '', 150);
+            $asn = self::text($network['asn'] ?? '', 20);
+
+            $rows[$ip] = [
+                'country_code' => strtoupper(substr(self::text($location['country_code'] ?? '', 2), 0, 2)),
+                'country'      => self::text($location['country_name'] ?? '', 100),
+                'city'         => self::text($location['city_name'] ?? '', 100),
+                'isp'          => $provider,
+                'org'          => self::text($network['organisation'] ?? $provider, 150),
+                'asn'          => '' === $asn ? '' : mb_substr(trim($asn . ' ' . $provider), 0, 150),
+                'is_proxy'     => (!empty($detections['proxy']) || !empty($detections['vpn']) || !empty($detections['tor'])) ? 1 : 0,
+                'is_hosting'   => (!empty($detections['hosting']) || 'Hosting' === $type) ? 1 : 0,
+                'is_mobile'    => 'Wireless' === $type ? 1 : 0,
             ];
         }
 

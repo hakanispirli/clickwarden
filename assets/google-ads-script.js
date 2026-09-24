@@ -1,6 +1,6 @@
 /**
  * ClickWarden – Google Ads IP exclusion sync
- * https://webmarka.com/clickwarden
+ * https://github.com/hakanispirli/clickwarden
  *
  * Setup: Google Ads → Tools → Bulk actions → Scripts → + → paste this code,
  * click "Authorize", try it with "Preview", then set the frequency to "Hourly".
