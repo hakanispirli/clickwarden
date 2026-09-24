@@ -1,0 +1,1132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ClickWarden 3.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/clickwarden\n"
+"PO-Revision-Date: 2026-09-21 12:00+0000\n"
+"Last-Translator: Webmarka <info@webmarka.com>\n"
+"Language-Team: Turkish\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: clickwarden\n"
+
+#. Plugin Name of the plugin
+#: clickwarden.php
+msgid "ClickWarden – Click Fraud Protection for Google Ads"
+msgstr "ClickWarden – Google Ads için Tıklama Sahtekarlığı Koruması"
+
+#. Plugin URI of the plugin
+#: clickwarden.php
+msgid "https://webmarka.com/clickwarden"
+msgstr "https://webmarka.com/clickwarden"
+
+#. Description of the plugin
+#: clickwarden.php
+msgid "Detects invalid and fraudulent Google Ads clicks on your own server and keeps your campaign IP exclusions up to date automatically. Free, self-hosted, cache friendly."
+msgstr "Geçersiz ve sahte Google Ads tıklamalarını kendi sunucunuzda tespit eder ve kampanyalarınızın IP hariç tutma listesini otomatik olarak güncel tutar. Ücretsiz, kendi sitenizde çalışır, önbellek dostudur."
+
+#. Author of the plugin
+#: clickwarden.php
+msgid "Webmarka"
+msgstr "Webmarka"
+
+#. Author URI of the plugin
+#: clickwarden.php
+msgid "https://webmarka.com"
+msgstr "https://webmarka.com"
+
+#: clickwarden.php:117
+msgid "Every minute (ClickWarden)"
+msgstr "Her dakika (ClickWarden)"
+
+#. translators: %d: retention period in days
+#: clickwarden.php:152
+#, php-format
+msgid "To protect our advertising campaigns against invalid and fraudulent clicks, we record the IP address, browser user agent, visited page, referrer, advertising click identifiers (gclid, gbraid, wbraid, gad_campaignid, utm parameters), the identifiers stored in existing Google Analytics and Google Ads cookies (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) and basic engagement data (time on page, scroll depth, whether the page was interacted with) of our visitors. If enabled, the IP address is sent to ipapi.is (and optionally ip-api.com) to look up its approximate location and network type. This processing is based on our legitimate interest in preventing ad fraud. The data is kept for %d days and then deleted automatically; IP addresses identified as fraudulent may be kept longer and shared with Google Ads as an IP exclusion list."
+msgstr "Reklam kampanyalarımızı geçersiz ve sahte tıklamalara karşı korumak amacıyla ziyaretçilerimizin IP adresini, tarayıcı bilgisini (user agent), ziyaret edilen sayfayı, yönlendiren adresi, reklam tıklama tanımlayıcılarını (gclid, gbraid, wbraid, gad_campaignid, utm parametreleri), mevcut Google Analytics ve Google Ads çerezlerinde (_ga, _gcl_au, _gcl_aw, _gcl_gb, _gcl_gs) saklanan tanımlayıcıları ve temel etkileşim verilerini (sayfada kalma süresi, kaydırma derinliği, sayfayla etkileşim olup olmadığı) kaydederiz. Etkinleştirilmişse IP adresi, yaklaşık konum ve ağ türünü belirlemek için ipapi.is'e (ve isteğe bağlı olarak ip-api.com'a) gönderilir. Bu işleme, reklam dolandırıcılığını önlemeye yönelik meşru menfaatimize dayanır. Veriler %d gün saklanır ve ardından otomatik olarak silinir; sahte olarak belirlenen IP adresleri daha uzun süre saklanabilir ve IP hariç tutma listesi olarak Google Ads ile paylaşılabilir."
+
+#. translators: %s: link to Webmarka
+#: includes/class-admin.php:43
+#, php-format
+msgid "ClickWarden is free and open source, made with care by %s."
+msgstr "ClickWarden ücretsiz ve açık kaynaklıdır, %s tarafından özenle geliştirilmiştir."
+
+#: includes/class-admin.php:50
+#: includes/class-admin.php:51
+msgid "ClickWarden"
+msgstr "ClickWarden"
+
+#: includes/class-admin.php:66
+#: includes/class-admin.php:81
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: includes/class-admin.php:77
+msgid "Overview"
+msgstr "Genel Bakış"
+
+#: includes/class-admin.php:78
+#: includes/class-list-table-ips.php:28
+msgid "Visits"
+msgstr "Ziyaretler"
+
+#: includes/class-admin.php:79
+msgid "IP Addresses"
+msgstr "IP Adresleri"
+
+#: includes/class-admin.php:80
+#: includes/class-list-table-hits.php:148
+msgid "Google Ads"
+msgstr "Google Ads"
+
+#: includes/class-admin.php:93
+msgid "Rows per page"
+msgstr "Sayfa başına satır"
+
+#: includes/class-admin.php:185
+#: includes/class-admin.php:374
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Bu sayfaya erişim yetkiniz yok."
+
+#: includes/class-admin.php:249
+msgid "Receive your first visits"
+msgstr "İlk ziyaretleri alın"
+
+#: includes/class-admin.php:250
+msgid "Open your site in a private window. If nothing shows up, purge your page cache and CDN."
+msgstr "Sitenizi gizli pencerede açın. Hiçbir şey görünmezse sayfa önbelleğinizi ve CDN'i temizleyin."
+
+#: includes/class-admin.php:255
+msgid "Exclude your own IP address"
+msgstr "Kendi IP adresinizi hariç tutun"
+
+#: includes/class-admin.php:256
+msgid "Your office and team clicks should never count as fraud."
+msgstr "Ofisinizin ve ekibinizin tıklamaları asla sahtekarlık sayılmamalı."
+
+#: includes/class-admin.php:261
+msgid "Enable network lookups"
+msgstr "Ağ sorgularını etkinleştirin"
+
+#: includes/class-admin.php:262
+msgid "Detects datacenter, VPN and proxy IPs, the strongest fraud signals."
+msgstr "En güçlü sahtekarlık sinyalleri olan veri merkezi, VPN ve proxy IP'lerini tespit eder."
+
+#: includes/class-admin.php:267
+msgid "Connect Google Ads"
+msgstr "Google Ads'i bağlayın"
+
+#: includes/class-admin.php:268
+msgid "Install the script once; suspicious IPs are then excluded from your campaigns every hour."
+msgstr "Script'i bir kez kurun; şüpheli IP'ler bundan sonra her saat kampanyalarınızdan hariç tutulur."
+
+#. translators: %d: seconds
+#: includes/class-admin.php:305
+#, php-format
+msgid "%ds"
+msgstr "%d sn"
+
+#. translators: 1: minutes, 2: seconds
+#: includes/class-admin.php:308
+#, php-format
+msgid "%1$dm %2$ds"
+msgstr "%1$d dk %2$d sn"
+
+#: includes/class-admin.php:336
+msgid "No visits were recorded in the last 24 hours. If your site gets traffic, purge your page cache and CDN (for example LiteSpeed Cache and your host's CDN) so pages include the ClickWarden tracker."
+msgstr "Son 24 saatte hiç ziyaret kaydedilmedi. Sitenize trafik geliyorsa, sayfaların ClickWarden takip betiğini içermesi için sayfa önbelleğinizi ve CDN'i temizleyin (ör. LiteSpeed Cache ve hosting firmanızın CDN'i)."
+
+#: includes/class-admin.php:342
+msgid "Settings saved."
+msgstr "Ayarlar kaydedildi."
+
+#. translators: %d: number of deleted records
+#: includes/class-admin.php:352
+#, php-format
+msgid "%d old visit deleted."
+msgid_plural "%d old visits deleted."
+msgstr[0] "%d eski ziyaret silindi."
+msgstr[1] "%d eski ziyaret silindi."
+
+#. translators: %d: number of IP addresses
+#: includes/class-admin.php:354
+#, php-format
+msgid "%d IP address updated."
+msgid_plural "%d IP addresses updated."
+msgstr[0] "%d IP adresi güncellendi."
+msgstr[1] "%d IP adresi güncellendi."
+
+#: includes/class-admin.php:355
+msgid "No IP address selected."
+msgstr "Hiç IP adresi seçilmedi."
+
+#: includes/class-admin.php:356
+msgid "New access key created. Paste the updated script into Google Ads, the old key no longer works."
+msgstr "Yeni erişim anahtarı oluşturuldu. Güncel script'i Google Ads'e yapıştırın; eski anahtar artık çalışmaz."
+
+#: includes/class-admin.php:470
+msgid "Invalid export type."
+msgstr "Geçersiz dışa aktarım türü."
+
+#: includes/class-bot-detector.php:144
+msgid "Google/Bing ad bots"
+msgstr "Google/Bing reklam botları"
+
+#: includes/class-bot-detector.php:145
+msgid "Search engines"
+msgstr "Arama motorları"
+
+#: includes/class-bot-detector.php:146
+msgid "AI crawlers"
+msgstr "Yapay zekâ tarayıcıları"
+
+#: includes/class-bot-detector.php:147
+msgid "SEO tools"
+msgstr "SEO araçları"
+
+#: includes/class-bot-detector.php:148
+msgid "Social previews"
+msgstr "Sosyal medya önizlemeleri"
+
+#: includes/class-bot-detector.php:149
+msgid "Uptime / performance"
+msgstr "Uptime / performans"
+
+#: includes/class-bot-detector.php:150
+msgid "Automation / headless"
+msgstr "Otomasyon / headless"
+
+#: includes/class-bot-detector.php:151
+msgid "Other bots"
+msgstr "Diğer botlar"
+
+#: includes/class-list-table-hits.php:23
+msgid "Time"
+msgstr "Zaman"
+
+#: includes/class-list-table-hits.php:24
+msgid "IP / Risk"
+msgstr "IP / Risk"
+
+#: includes/class-list-table-hits.php:25
+#: includes/class-list-table-ips.php:26
+msgid "Location / Network"
+msgstr "Konum / Ağ"
+
+#: includes/class-list-table-hits.php:26
+msgid "Page"
+msgstr "Sayfa"
+
+#: includes/class-list-table-hits.php:27
+msgid "Source"
+msgstr "Kaynak"
+
+#: includes/class-list-table-hits.php:28
+msgid "Visitor"
+msgstr "Ziyaretçi"
+
+#: includes/class-list-table-hits.php:29
+msgid "Engagement"
+msgstr "Etkileşim"
+
+#: includes/class-list-table-hits.php:63
+msgid "No visits match these filters."
+msgstr "Bu filtrelere uyan ziyaret yok."
+
+#: includes/class-list-table-hits.php:64
+msgid "No visits recorded yet. Visits appear here as soon as the tracker script runs on your site."
+msgstr "Henüz ziyaret kaydedilmedi. Takip betiği sitenizde çalıştığı anda ziyaretler burada görünür."
+
+#: includes/class-list-table-hits.php:91
+msgid "Google Analytics browser id: show every visit of this browser, from any IP"
+msgstr "Google Analytics tarayıcı kimliği: bu tarayıcının tüm IP'lerden gelen ziyaretlerini göster"
+
+#: includes/class-list-table-hits.php:100
+msgid "IP details"
+msgstr "IP detayları"
+
+#: includes/class-list-table-hits.php:109
+#: includes/class-list-table-ips.php:138
+msgid "Resolving…"
+msgstr "Sorgulanıyor…"
+
+#: includes/class-list-table-hits.php:121
+#: includes/class-list-table-ips.php:154
+msgid "Datacenter"
+msgstr "Veri merkezi"
+
+#: includes/class-list-table-hits.php:124
+#: includes/class-list-table-ips.php:157
+msgid "VPN/Proxy"
+msgstr "VPN/Proxy"
+
+#: includes/class-list-table-hits.php:127
+#: includes/class-list-table-ips.php:160
+#: templates/tab-ips.php:104
+msgid "Mobile network"
+msgstr "Mobil ağ"
+
+#: includes/class-list-table-hits.php:153
+msgid "Same click id as an earlier visit (page reload or shared link). Google does not charge it again, so it is not counted as a new ad click."
+msgstr "Önceki bir ziyaretle aynı tıklama kimliği (sayfa yenileme veya paylaşılan bağlantı). Google bunu tekrar ücretlendirmez, bu yüzden yeni reklam tıklaması sayılmaz."
+
+#: includes/class-list-table-hits.php:154
+msgid "Reload"
+msgstr "Yenileme"
+
+#. translators: %s: Google Ads campaign id
+#: includes/class-list-table-hits.php:161
+#: templates/tab-overview.php:223
+#, php-format
+msgid "Campaign ID %s"
+msgstr "Kampanya ID %s"
+
+#: includes/class-list-table-hits.php:168
+msgid "The _gcl_aw cookie shows this browser clicked one of your ads before."
+msgstr "_gcl_aw çerezi, bu tarayıcının daha önce reklamlarınızdan birine tıkladığını gösteriyor."
+
+#: includes/class-list-table-hits.php:169
+msgid "Returning ad clicker"
+msgstr "Tekrar gelen reklam tıklayıcısı"
+
+#. translators: %s: search keyword
+#: includes/class-list-table-hits.php:177
+#, php-format
+msgid "Keyword: %s"
+msgstr "Anahtar kelime: %s"
+
+#: includes/class-list-table-hits.php:186
+msgid "Direct"
+msgstr "Doğrudan"
+
+#: includes/class-list-table-hits.php:195
+msgid "Bot"
+msgstr "Bot"
+
+#: includes/class-list-table-hits.php:198
+msgid "Human"
+msgstr "İnsan"
+
+#: includes/class-list-table-hits.php:202
+msgid "WebDriver"
+msgstr "WebDriver"
+
+#: includes/class-list-table-hits.php:218
+msgid "Interacted"
+msgstr "Etkileşim var"
+
+#: includes/class-list-table-hits.php:219
+msgid "No interaction"
+msgstr "Etkileşim yok"
+
+#. translators: %d: scroll depth percentage
+#: includes/class-list-table-hits.php:222
+#, php-format
+msgid "%d%% scrolled"
+msgstr "%%%d kaydırıldı"
+
+#: includes/class-list-table-ips.php:24
+#: templates/tab-overview.php:178
+msgid "IP Address"
+msgstr "IP Adresi"
+
+#: includes/class-list-table-ips.php:25
+#: templates/tab-hits.php:67
+#: templates/tab-overview.php:179
+msgid "Risk"
+msgstr "Risk"
+
+#: includes/class-list-table-ips.php:27
+#: templates/tab-overview.php:151
+#: templates/tab-overview.php:180
+msgid "Ad clicks"
+msgstr "Reklam tıklaması"
+
+#: includes/class-list-table-ips.php:29
+msgid "Last seen"
+msgstr "Son görülme"
+
+#: includes/class-list-table-ips.php:50
+msgid "Mark as suspicious"
+msgstr "Şüpheli olarak işaretle"
+
+#: includes/class-list-table-ips.php:51
+#: includes/class-list-table-ips.php:114
+msgid "Whitelist"
+msgstr "Beyaz listeye al"
+
+#: includes/class-list-table-ips.php:52
+msgid "Reset to automatic"
+msgstr "Otomatiğe sıfırla"
+
+#: includes/class-list-table-ips.php:73
+msgid "No IP addresses match these filters."
+msgstr "Bu filtrelere uyan IP adresi yok."
+
+#. translators: %s: IP address
+#: includes/class-list-table-ips.php:81
+#, php-format
+msgid "Select %s"
+msgstr "%s seç"
+
+#: includes/class-list-table-ips.php:90
+msgid "Copy IP address"
+msgstr "IP adresini kopyala"
+
+#: includes/class-list-table-ips.php:94
+#: includes/class-risk-scorer.php:129
+#: templates/tab-ips.php:95
+msgid "Whitelisted"
+msgstr "Beyaz listede"
+
+#: includes/class-list-table-ips.php:96
+#: templates/tab-ips.php:94
+msgid "Flagged manually"
+msgstr "Elle işaretlendi"
+
+#: includes/class-list-table-ips.php:100
+#: templates/tab-ads.php:35
+msgid "Blocked in Google Ads"
+msgstr "Google Ads'te engelli"
+
+#: includes/class-list-table-ips.php:107
+msgid "View visits"
+msgstr "Ziyaretleri gör"
+
+#: includes/class-list-table-ips.php:111
+msgid "Mark suspicious"
+msgstr "Şüpheli işaretle"
+
+#: includes/class-list-table-ips.php:117
+msgid "Reset"
+msgstr "Sıfırla"
+
+#: includes/class-list-table-ips.php:138
+msgid "Lookup failed, retrying"
+msgstr "Sorgu başarısız, tekrar denenecek"
+
+#. translators: %s: date
+#: includes/class-list-table-ips.php:180
+#, php-format
+msgid "First: %s"
+msgstr "İlk: %s"
+
+#: includes/class-risk-scorer.php:10
+msgid "Repeated ad clicks"
+msgstr "Tekrarlanan reklam tıklamaları"
+
+#: includes/class-risk-scorer.php:11
+msgid "Multiple ad clicks"
+msgstr "Birden fazla reklam tıklaması"
+
+#: includes/class-risk-scorer.php:12
+msgid "Same browser, several IPs"
+msgstr "Aynı tarayıcı, farklı IP'ler"
+
+#: includes/class-risk-scorer.php:13
+msgid "Datacenter / hosting IP"
+msgstr "Veri merkezi / hosting IP"
+
+#: includes/class-risk-scorer.php:14
+msgid "Proxy / VPN / Tor"
+msgstr "Proxy / VPN / Tor"
+
+#: includes/class-risk-scorer.php:15
+msgid "Automated browser"
+msgstr "Otomatik tarayıcı"
+
+#: includes/class-risk-scorer.php:16
+msgid "Bot clicked an ad"
+msgstr "Bot reklama tıkladı"
+
+#: includes/class-risk-scorer.php:17
+msgid "Ad click without engagement"
+msgstr "Etkileşimsiz reklam tıklaması"
+
+#: includes/class-risk-scorer.php:18
+msgid "Outside target countries"
+msgstr "Hedef ülkelerin dışında"
+
+#: includes/class-risk-scorer.php:19
+msgid "Request flood"
+msgstr "Aşırı istek"
+
+#: includes/class-risk-scorer.php:126
+#: templates/tab-ips.php:84
+#: templates/tab-overview.php:108
+#: templates/tab-overview.php:152
+#: templates/tab-overview.php:211
+msgid "Suspicious"
+msgstr "Şüpheli"
+
+#: includes/class-risk-scorer.php:127
+#: templates/tab-ips.php:85
+msgid "Watch"
+msgstr "İzlemede"
+
+#: includes/class-risk-scorer.php:128
+#: templates/tab-ips.php:86
+msgid "Clean"
+msgstr "Temiz"
+
+#: templates/admin-page.php:28
+msgid "Click fraud protection for Google Ads"
+msgstr "Google Ads için tıklama sahtekarlığı koruması"
+
+#: templates/admin-page.php:36
+msgid "ClickWarden sections"
+msgstr "ClickWarden bölümleri"
+
+#: templates/tab-ads.php:16
+msgid "Last sync"
+msgstr "Son senkronizasyon"
+
+#: templates/tab-ads.php:20
+msgid "Never"
+msgstr "Henüz yok"
+
+#. translators: %s: human readable time difference
+#: templates/tab-ads.php:22
+#, php-format
+msgid "%s ago"
+msgstr "%s önce"
+
+#: templates/tab-ads.php:28
+msgid "The Google Ads script has not reported yet."
+msgstr "Google Ads script'i henüz çalışmadı."
+
+#. translators: 1: added IP count, 2: removed IP count
+#: templates/tab-ads.php:30
+#, php-format
+msgid "%1$d added, %2$d removed"
+msgstr "%1$d eklendi, %2$d kaldırıldı"
+
+#. translators: %d: number of IPs waiting on the exclusion list
+#: templates/tab-ads.php:40
+#, php-format
+msgid "%d IPs on the exclusion list"
+msgstr "Hariç tutma listesinde %d IP"
+
+#: templates/tab-ads.php:50
+msgid "Campaigns not found in Google Ads:"
+msgstr "Google Ads'te bulunamayan kampanyalar:"
+
+#: templates/tab-ads.php:52
+msgid "check that the names below match exactly."
+msgstr "aşağıdaki adların birebir aynı olduğunu kontrol edin."
+
+#: templates/tab-ads.php:66
+msgid "Google Ads script"
+msgstr "Google Ads script'i"
+
+#: templates/tab-ads.php:67
+msgid "This script already contains your site address and secret access key. Do not share it."
+msgstr "Bu script sitenizin adresini ve gizli erişim anahtarını içerir. Kimseyle paylaşmayın."
+
+#: templates/tab-ads.php:71
+msgid "Copy script"
+msgstr "Script'i kopyala"
+
+#: templates/tab-ads.php:76
+msgid "Setup"
+msgstr "Kurulum"
+
+#: templates/tab-ads.php:78
+msgid "Google Ads → Tools → Bulk actions → Scripts → click the blue + button → \"New script\"."
+msgstr "Google Ads → Araçlar → Toplu işlemler → Komut dosyaları → mavi + butonu → \"Yeni komut dosyası\"."
+
+#: templates/tab-ads.php:79
+msgid "Delete the sample code, paste this script and give it a name, e.g. \"ClickWarden IP sync\"."
+msgstr "Örnek kodu silin, bu script'i yapıştırın ve bir ad verin, ör. \"ClickWarden IP senkronizasyonu\"."
+
+#: templates/tab-ads.php:80
+msgid "Click \"Authorize\" and allow access with your Google account."
+msgstr "\"Yetkilendir\" butonuna basın ve Google hesabınızla izin verin."
+
+#: templates/tab-ads.php:81
+msgid "Click \"Preview\": the log shows what would be added. Preview makes no changes."
+msgstr "\"Önizleme\" butonuna basın: günlükte nelerin ekleneceği görünür. Önizleme hiçbir değişiklik yapmaz."
+
+#: templates/tab-ads.php:82
+msgid "Save, set \"Frequency\" to \"Hourly\". The first real run appears above as \"Last sync\"."
+msgstr "Kaydedin ve \"Sıklık\" ayarını \"Saatlik\" yapın. İlk gerçek çalışma yukarıda \"Son senkronizasyon\" olarak görünür."
+
+#: templates/tab-ads.php:90
+msgid "Campaigns"
+msgstr "Kampanyalar"
+
+#: templates/tab-ads.php:91
+msgid "Exact campaign names, one per line. IP exclusions apply to the whole campaign, including all its ad groups."
+msgstr "Kampanya adları birebir aynı olmalı, her satıra bir kampanya. IP hariç tutma, tüm reklam grupları dahil kampanyanın tamamına uygulanır."
+
+#: templates/tab-ads.php:95
+msgid "Found in last sync:"
+msgstr "Son senkronizasyonda bulunanlar:"
+
+#: templates/tab-ads.php:99
+msgid "Save campaigns"
+msgstr "Kampanyaları kaydet"
+
+#: templates/tab-ads.php:103
+msgid "How it works"
+msgstr "Nasıl çalışır"
+
+#: templates/tab-ads.php:105
+msgid "Every hour the script fetches the exclusion list from this site and adds new suspicious IPs to the campaigns, riskiest first."
+msgstr "Script her saat bu siteden hariç tutma listesini alır ve yeni şüpheli IP'leri en riskliden başlayarak kampanyalara ekler."
+
+#: templates/tab-ads.php:106
+msgid "IPs you whitelist are removed from Google Ads on the next run."
+msgstr "Beyaz listeye aldığınız IP'ler bir sonraki çalışmada Google Ads'ten kaldırılır."
+
+#: templates/tab-ads.php:107
+msgid "IPs you added by hand in Google Ads are never touched."
+msgstr "Google Ads'e elle eklediğiniz IP'lere hiçbir zaman dokunulmaz."
+
+#: templates/tab-ads.php:108
+msgid "The 500 IP per campaign limit of Google Ads is respected."
+msgstr "Google Ads'in kampanya başına 500 IP sınırı aşılmaz."
+
+#: templates/tab-ads.php:113
+msgid "Access key"
+msgstr "Erişim anahtarı"
+
+#: templates/tab-ads.php:114
+msgid "If the script was shared by mistake, create a new key. The old script stops working until you paste the new one."
+msgstr "Script yanlışlıkla paylaşıldıysa yeni bir anahtar oluşturun. Yenisini yapıştırana kadar eski script çalışmaz."
+
+#: templates/tab-ads.php:116
+msgid "Create a new access key? The script in Google Ads must be replaced afterwards."
+msgstr "Yeni erişim anahtarı oluşturulsun mu? Ardından Google Ads'teki script'i değiştirmeniz gerekir."
+
+#: templates/tab-ads.php:119
+msgid "Create new key"
+msgstr "Yeni anahtar oluştur"
+
+#. translators: %s: Google Analytics browser id
+#: templates/tab-hits.php:23
+#, php-format
+msgid "Showing one browser: %s"
+msgstr "Tek bir tarayıcı gösteriliyor: %s"
+
+#: templates/tab-hits.php:25
+msgid "Remove browser filter"
+msgstr "Tarayıcı filtresini kaldır"
+
+#: templates/tab-hits.php:31
+msgid "From"
+msgstr "Başlangıç"
+
+#: templates/tab-hits.php:35
+msgid "To"
+msgstr "Bitiş"
+
+#: templates/tab-hits.php:39
+#: templates/tab-ips.php:77
+msgid "IP address"
+msgstr "IP adresi"
+
+#: templates/tab-hits.php:43
+#: templates/tab-ips.php:109
+msgid "Country"
+msgstr "Ülke"
+
+#: templates/tab-hits.php:45
+#: templates/tab-ips.php:111
+msgid "All countries"
+msgstr "Tüm ülkeler"
+
+#: templates/tab-hits.php:54
+msgid "Visitor type"
+msgstr "Ziyaretçi türü"
+
+#: templates/tab-hits.php:56
+#: templates/tab-ips.php:92
+msgid "All"
+msgstr "Tümü"
+
+#: templates/tab-hits.php:57
+msgid "Humans only"
+msgstr "Sadece insanlar"
+
+#: templates/tab-hits.php:58
+msgid "Bots only"
+msgstr "Sadece botlar"
+
+#: templates/tab-hits.php:59
+msgid "Bot category"
+msgstr "Bot kategorisi"
+
+#: templates/tab-hits.php:69
+msgid "Any risk"
+msgstr "Tüm risk seviyeleri"
+
+#: templates/tab-hits.php:70
+msgid "Watch and above"
+msgstr "İzlemede ve üzeri"
+
+#: templates/tab-hits.php:71
+msgid "Suspicious only"
+msgstr "Sadece şüpheliler"
+
+#: templates/tab-hits.php:75
+msgid "Page contains"
+msgstr "Sayfa içerir"
+
+#: templates/tab-hits.php:79
+#: templates/tab-overview.php:209
+msgid "Campaign"
+msgstr "Kampanya"
+
+#: templates/tab-hits.php:80
+msgid "Name or ID"
+msgstr "Ad veya ID"
+
+#: templates/tab-hits.php:84
+msgid "Google Ads clicks only"
+msgstr "Sadece Google Ads tıklamaları"
+
+#: templates/tab-hits.php:89
+#: templates/tab-ips.php:138
+msgid "Filter"
+msgstr "Filtrele"
+
+#: templates/tab-hits.php:91
+#: templates/tab-ips.php:140
+msgid "Clear filters"
+msgstr "Filtreleri temizle"
+
+#: templates/tab-hits.php:95
+#: templates/tab-ips.php:144
+msgid "Export CSV"
+msgstr "CSV olarak dışa aktar"
+
+#. translators: %s: number of visits
+#: templates/tab-hits.php:101
+#, php-format
+msgid "%s visit"
+msgid_plural "%s visits"
+msgstr[0] "%s ziyaret"
+msgstr[1] "%s ziyaret"
+
+#: templates/tab-ips.php:19
+msgid "Google Ads IP exclusion list"
+msgstr "Google Ads IP hariç tutma listesi"
+
+#. translators: %s: number of IP addresses
+#: templates/tab-ips.php:24
+#, php-format
+msgid "%s suspicious IP that clicked your ads, ordered by risk."
+msgid_plural "%s suspicious IPs that clicked your ads, ordered by risk."
+msgstr[0] "Reklamlarınıza tıklayan %s şüpheli IP, riske göre sıralı."
+msgstr[1] "Reklamlarınıza tıklayan %s şüpheli IP, riske göre sıralı."
+
+#: templates/tab-ips.php:28
+msgid "Google Ads accepts up to 500 excluded IPs per campaign: Campaign → Settings → Additional settings → IP exclusions."
+msgstr "Google Ads kampanya başına en fazla 500 IP hariç tutmaya izin verir: Kampanya → Ayarlar → Ek ayarlar → IP hariç tutma."
+
+#: templates/tab-ips.php:34
+msgid "Copy list"
+msgstr "Listeyi kopyala"
+
+#: templates/tab-ips.php:42
+msgid "Download .txt"
+msgstr ".txt indir"
+
+#: templates/tab-ips.php:51
+msgid "No suspicious IPs yet. IPs appear here once they click an ad and exceed the suspicious score."
+msgstr "Henüz şüpheli IP yok. Bir IP reklama tıklayıp şüpheli skorunu aştığında burada görünür."
+
+#: templates/tab-ips.php:56
+msgid "Range suggestions:"
+msgstr "Aralık önerileri:"
+
+#. translators: %d: number of suspicious IPs in the range
+#: templates/tab-ips.php:62
+#, php-format
+msgid "%d IP"
+msgid_plural "%d IPs"
+msgstr[0] "%d IP"
+msgstr[1] "%d IP"
+
+#: templates/tab-ips.php:66
+msgid "Several suspicious IPs share these /24 blocks. Excluding the whole block saves slots in the 500 IP limit, but may also block real customers on the same network."
+msgstr "Birden fazla şüpheli IP bu /24 bloklarını paylaşıyor. Bloğun tamamını hariç tutmak 500 IP limitinde yer kazandırır, ancak aynı ağdaki gerçek müşterileri de engelleyebilir."
+
+#: templates/tab-ips.php:81
+msgid "Risk level"
+msgstr "Risk seviyesi"
+
+#: templates/tab-ips.php:83
+msgid "All levels"
+msgstr "Tüm seviyeler"
+
+#: templates/tab-ips.php:90
+#: templates/tab-settings.php:149
+msgid "Status"
+msgstr "Durum"
+
+#: templates/tab-ips.php:93
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: templates/tab-ips.php:99
+msgid "Network"
+msgstr "Ağ"
+
+#: templates/tab-ips.php:101
+msgid "All networks"
+msgstr "Tüm ağlar"
+
+#: templates/tab-ips.php:102
+msgid "Datacenter / hosting"
+msgstr "Veri merkezi / hosting"
+
+#: templates/tab-ips.php:103
+msgid "VPN / proxy"
+msgstr "VPN / proxy"
+
+#: templates/tab-ips.php:105
+msgid "Residential"
+msgstr "Ev / bireysel"
+
+#: templates/tab-ips.php:120
+msgid "Min. ad clicks"
+msgstr "Min. reklam tıklaması"
+
+#: templates/tab-ips.php:125
+msgid "Blocked in Google Ads only"
+msgstr "Sadece Google Ads'te engelliler"
+
+#: templates/tab-ips.php:128
+msgid "Seen from"
+msgstr "Görülme başlangıcı"
+
+#: templates/tab-ips.php:132
+msgid "Seen until"
+msgstr "Görülme bitişi"
+
+#. translators: %s: number of IP addresses
+#: templates/tab-ips.php:150
+#, php-format
+msgid "%s IP address"
+msgid_plural "%s IP addresses"
+msgstr[0] "%s IP adresi"
+msgstr[1] "%s IP adresi"
+
+#: templates/tab-overview.php:16
+msgid "Ad clicks today"
+msgstr "Bugünkü reklam tıklamaları"
+
+#. translators: %s: number of suspicious clicks
+#: templates/tab-overview.php:19
+#, php-format
+msgid "%s from suspicious IPs"
+msgstr "%s tanesi şüpheli IP'lerden"
+
+#: templates/tab-overview.php:24
+msgid "Suspicious IPs"
+msgstr "Şüpheli IP'ler"
+
+#. translators: %s: number of IPs on the watch list
+#: templates/tab-overview.php:27
+#, php-format
+msgid "%s more on the watch list"
+msgstr "%s IP daha izleme listesinde"
+
+#: templates/tab-overview.php:32
+msgid "Suspicious click rate (7 days)"
+msgstr "Şüpheli tıklama oranı (7 gün)"
+
+#. translators: 1: suspicious clicks, 2: total ad clicks
+#: templates/tab-overview.php:35
+#, php-format
+msgid "%1$s of %2$s ad clicks"
+msgstr "%2$s reklam tıklamasının %1$s tanesi"
+
+#: templates/tab-overview.php:40
+msgid "Datacenter / VPN clicks (7 days)"
+msgstr "Veri merkezi / VPN tıklamaları (7 gün)"
+
+#. translators: %s: share of bot traffic
+#: templates/tab-overview.php:43
+#, php-format
+msgid "Bot share of all traffic: %s"
+msgstr "Tüm trafikte bot oranı: %s"
+
+#: templates/tab-overview.php:65
+msgid "Get started"
+msgstr "Başlarken"
+
+#. translators: 1: completed steps, 2: total steps
+#: templates/tab-overview.php:69
+#, php-format
+msgid "%1$d of %2$d steps completed"
+msgstr "%2$d adımdan %1$d tanesi tamamlandı"
+
+#: templates/tab-overview.php:82
+msgid "(done)"
+msgstr "(tamamlandı)"
+
+#: templates/tab-overview.php:82
+msgid "(to do)"
+msgstr "(yapılacak)"
+
+#: templates/tab-overview.php:105
+#: templates/tab-overview.php:147
+msgid "Ad clicks, last 14 days"
+msgstr "Reklam tıklamaları, son 14 gün"
+
+#: templates/tab-overview.php:107
+msgid "Normal"
+msgstr "Normal"
+
+#. translators: 1: date, 2: ad clicks, 3: suspicious clicks
+#: templates/tab-overview.php:128
+#, php-format
+msgid "%1$s: %2$d ad clicks, %3$d suspicious"
+msgstr "%1$s: %2$d reklam tıklaması, %3$d şüpheli"
+
+#: templates/tab-overview.php:150
+msgid "Day"
+msgstr "Gün"
+
+#: templates/tab-overview.php:169
+msgid "Riskiest IP addresses"
+msgstr "En riskli IP adresleri"
+
+#: templates/tab-overview.php:170
+msgid "View all"
+msgstr "Tümünü gör"
+
+#: templates/tab-overview.php:173
+#: templates/tab-overview.php:204
+msgid "No ad clicks recorded yet."
+msgstr "Henüz reklam tıklaması kaydedilmedi."
+
+#: templates/tab-overview.php:201
+msgid "Campaigns (7 days)"
+msgstr "Kampanyalar (7 gün)"
+
+#: templates/tab-overview.php:210
+msgid "Clicks"
+msgstr "Tıklama"
+
+#: templates/tab-overview.php:228
+msgid "(unknown campaign)"
+msgstr "(bilinmeyen kampanya)"
+
+#: templates/tab-overview.php:246
+msgid "Tip: Google Ads adds the campaign ID to your URLs automatically. To also see which keywords attract suspicious clicks, add utm_term={keyword} to the Final URL suffix (Google Ads → Settings → Tracking). Compare the ad clicks here with the clicks in Google Ads: bots that do not run JavaScript never reach this report."
+msgstr "İpucu: Google Ads kampanya kimliğini adreslerinize otomatik ekler. Hangi anahtar kelimelerin şüpheli tıklama aldığını da görmek için Nihai URL son ekine utm_term={keyword} ekleyin (Google Ads → Ayarlar → İzleme). Buradaki reklam tıklamalarını Google Ads'teki tıklamalarla karşılaştırın: JavaScript çalıştırmayan botlar bu rapora hiç ulaşmaz."
+
+#: templates/tab-settings.php:19
+msgid "Risk scoring"
+msgstr "Risk puanlama"
+
+#: templates/tab-settings.php:22
+msgid "Target countries"
+msgstr "Hedef ülkeler"
+
+#: templates/tab-settings.php:25
+msgid "Two-letter country codes your campaigns target, comma separated. Clicks from other countries add risk. Leave empty to disable."
+msgstr "Kampanyalarınızın hedeflediği iki harfli ülke kodları, virgülle ayrılmış. Diğer ülkelerden gelen tıklamalar riski artırır. Devre dışı bırakmak için boş bırakın."
+
+#: templates/tab-settings.php:29
+msgid "Repeated clicks"
+msgstr "Tekrarlanan tıklamalar"
+
+#. translators: 1: click count input, 2: hours input
+#: templates/tab-settings.php:34
+#, php-format
+msgid "%1$s or more ad clicks from the same IP or browser within %2$s hours"
+msgstr "Aynı IP'den veya tarayıcıdan %2$s saat içinde %1$s veya daha fazla reklam tıklaması"
+
+#: templates/tab-settings.php:35
+msgid "Click threshold"
+msgstr "Tıklama eşiği"
+
+#: templates/tab-settings.php:36
+msgid "Time window in hours"
+msgstr "Saat cinsinden zaman aralığı"
+
+#: templates/tab-settings.php:42
+msgid "Score thresholds"
+msgstr "Skor eşikleri"
+
+#: templates/tab-settings.php:45
+msgid "Suspicious from"
+msgstr "Şüpheli eşiği"
+
+#: templates/tab-settings.php:50
+msgid "Watch from"
+msgstr "İzleme eşiği"
+
+#: templates/tab-settings.php:53
+msgid "Scores range from 0 to 100. Only suspicious IPs that clicked an ad are added to the Google Ads exclusion list."
+msgstr "Skorlar 0 ile 100 arasındadır. Google Ads hariç tutma listesine sadece reklama tıklamış şüpheli IP'ler eklenir."
+
+#: templates/tab-settings.php:57
+msgid "Request limit"
+msgstr "İstek limiti"
+
+#: templates/tab-settings.php:60
+msgid "page views per minute per IP"
+msgstr "IP başına dakikada sayfa görüntüleme"
+
+#: templates/tab-settings.php:61
+msgid "Requests above this limit are not recorded and add risk to the IP."
+msgstr "Bu limitin üzerindeki istekler kaydedilmez ve IP'nin riskini artırır."
+
+#: templates/tab-settings.php:66
+msgid "Tracking"
+msgstr "Takip"
+
+#: templates/tab-settings.php:69
+msgid "Keep data for"
+msgstr "Veri saklama süresi"
+
+#: templates/tab-settings.php:72
+msgid "days"
+msgstr "gün"
+
+#: templates/tab-settings.php:73
+msgid "Older visits are deleted automatically every day. Whitelisted and flagged IPs are kept."
+msgstr "Daha eski ziyaretler her gün otomatik silinir. Beyaz listedeki ve işaretlenen IP'ler korunur."
+
+#: templates/tab-settings.php:77
+msgid "Excluded IPs"
+msgstr "Hariç tutulan IP'ler"
+
+#: templates/tab-settings.php:81
+msgid "Your office or team IPs are never recorded. One IP or CIDR range (e.g. 88.1.2.0/24) per line."
+msgstr "Ofis veya ekip IP'leriniz hiçbir zaman kaydedilmez. Her satıra bir IP veya CIDR aralığı (ör. 88.1.2.0/24)."
+
+#. translators: %s: current IP address
+#: templates/tab-settings.php:86
+#, php-format
+msgid "Your current IP: %s"
+msgstr "Mevcut IP adresiniz: %s"
+
+#: templates/tab-settings.php:93
+msgid "Trusted proxies"
+msgstr "Güvenilir proxy'ler"
+
+#: templates/tab-settings.php:96
+msgid "Leave empty unless the site is behind a CDN or reverse proxy. The X-Forwarded-For header is only trusted for requests coming from these IPs/ranges; otherwise visitors could fake their IP address."
+msgstr "Site bir CDN veya reverse proxy arkasında değilse boş bırakın. X-Forwarded-For başlığına yalnızca bu IP/aralıklardan gelen isteklerde güvenilir; aksi halde ziyaretçiler IP adreslerini sahte gösterebilir."
+
+#: templates/tab-settings.php:101
+msgid "Network lookups"
+msgstr "Ağ sorguları"
+
+#: templates/tab-settings.php:104
+msgid "IP lookups"
+msgstr "IP sorguları"
+
+#: templates/tab-settings.php:109
+msgid "Look up visitor IPs with ipapi.is"
+msgstr "Ziyaretçi IP'lerini ipapi.is ile sorgula"
+
+#: templates/tab-settings.php:112
+msgid "Sends visitor IP addresses to ipapi.is to find their country, network and whether they belong to a datacenter, VPN, proxy or Tor. These are the strongest click fraud signals. Nothing is sent until you enable this."
+msgstr "Ülke, ağ ve IP'nin veri merkezi, VPN, proxy veya Tor'a ait olup olmadığını bulmak için ziyaretçi IP adreslerini ipapi.is'e gönderir. Bunlar en güçlü tıklama sahtekarlığı sinyalleridir. Siz etkinleştirene kadar hiçbir veri gönderilmez."
+
+#: templates/tab-settings.php:113
+msgid "Privacy policy"
+msgstr "Gizlilik politikası"
+
+#: templates/tab-settings.php:118
+msgid "ipapi.is API key"
+msgstr "ipapi.is API anahtarı"
+
+#: templates/tab-settings.php:121
+msgid "Optional but recommended: a free key from ipapi.is raises the daily limit. IPs that clicked an ad are always looked up first."
+msgstr "İsteğe bağlı ama önerilir: ipapi.is'ten alacağınız ücretsiz anahtar günlük limiti artırır. Reklama tıklayan IP'ler her zaman önce sorgulanır."
+
+#: templates/tab-settings.php:125
+msgid "Fallback provider"
+msgstr "Yedek servis"
+
+#: templates/tab-settings.php:130
+msgid "Use ip-api.com when ipapi.is is unavailable or its daily quota is used up"
+msgstr "ipapi.is erişilemediğinde veya günlük kotası dolduğunda ip-api.com'u kullan"
+
+#: templates/tab-settings.php:133
+msgid "The free ip-api.com endpoint is HTTP only and for non-commercial use. Enter a Pro key below for HTTPS and commercial use."
+msgstr "Ücretsiz ip-api.com servisi yalnızca HTTP destekler ve ticari olmayan kullanım içindir. HTTPS ve ticari kullanım için aşağıya Pro anahtar girin."
+
+#: templates/tab-settings.php:134
+msgid "Terms"
+msgstr "Kullanım koşulları"
+
+#: templates/tab-settings.php:137
+msgid "ip-api.com Pro key"
+msgstr "ip-api.com Pro anahtarı"
+
+#: templates/tab-settings.php:151
+msgid "IPs waiting for geolocation"
+msgstr "Konum sorgusu bekleyen IP'ler"
+
+#: templates/tab-settings.php:153
+msgid "Active provider"
+msgstr "Aktif servis"
+
+#: templates/tab-settings.php:157
+msgid "Disabled"
+msgstr "Kapalı"
+
+#. translators: %s: time when the primary provider is retried
+#: templates/tab-settings.php:162
+#, php-format
+msgid "ip-api.com (ipapi.is retried at %s)"
+msgstr "ip-api.com (ipapi.is %s itibarıyla tekrar denenecek)"
+
+#: templates/tab-settings.php:164
+msgid "Paused, retrying shortly"
+msgstr "Beklemede, kısa süre içinde tekrar denenecek"
+
+#: templates/tab-settings.php:168
+msgid "Next geolocation run"
+msgstr "Sonraki konum sorgusu"
+
+#: templates/tab-settings.php:169
+#: templates/tab-settings.php:171
+msgid "Not scheduled"
+msgstr "Planlanmadı"
+
+#: templates/tab-settings.php:170
+msgid "Next cleanup"
+msgstr "Sonraki temizlik"
+
+#: templates/tab-settings.php:175
+msgid "WP-Cron only runs when the site gets traffic. For reliable lookups, add a cron job in your hosting control panel that runs every minute:"
+msgstr "WP-Cron yalnızca siteye trafik geldiğinde çalışır. Güvenilir sorgular için hosting kontrol panelinize her dakika çalışan bir cron görevi ekleyin:"
+
+#: templates/tab-settings.php:182
+msgid "Page cache & CDN"
+msgstr "Sayfa önbelleği ve CDN"
+
+#: templates/tab-settings.php:183
+msgid "The tracker runs in the browser, so cached pages are tracked too. After installing or updating ClickWarden, purge your page cache and your CDN once, otherwise cached pages are served without the tracker. The script is excluded from LiteSpeed Cache JS optimization automatically; with other optimization plugins, exclude clickwarden/assets/js/tracker.js from combining and delaying."
+msgstr "Takip tarayıcıda çalışır, bu yüzden önbellekten sunulan sayfalar da takip edilir. ClickWarden'ı kurduktan veya güncelledikten sonra sayfa önbelleğinizi ve CDN'i bir kez temizleyin; aksi halde önbellekteki sayfalar takip betiği olmadan sunulur. Betik LiteSpeed Cache JS optimizasyonundan otomatik olarak hariç tutulur; başka optimizasyon eklentilerinde clickwarden/assets/js/tracker.js dosyasını birleştirme ve geciktirmeden hariç tutun."
+
+#: templates/tab-settings.php:187
+msgid "Clean up"
+msgstr "Temizlik"
+
+#. translators: %d: retention period in days
+#: templates/tab-settings.php:191
+#, php-format
+msgid "Delete visits older than %d days now."
+msgstr "%d günden eski ziyaretleri şimdi sil."
+
+#: templates/tab-settings.php:195
+msgid "Delete old visits now? This cannot be undone."
+msgstr "Eski ziyaretler şimdi silinsin mi? Bu işlem geri alınamaz."
+
+#: templates/tab-settings.php:198
+msgid "Delete old visits"
+msgstr "Eski ziyaretleri sil"
